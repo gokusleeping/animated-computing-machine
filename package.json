@@ -10,6 +10,7 @@
   "license": "GPL-3.0-or-later",
   "dependencies": {
     "next": "^12.0.0",
+    "qrcode": "^1.4.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "socket.io-client": "^4.3.2"

@@ -1,0 +1,21 @@
+.form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  .input {
+    padding-right: 0%;
+    font-size: 3rem;
+    font-family: "Lucida Sans", "Lucida Sans Unicode", Geneva, Verdana,
+      sans-serif;
+  }
+
+  .btn {
+    padding: 0.5rem 2.5rem;
+    flood-color: black;
+  }
+  .imgage {
+    width: 50%;
+    height: 50%;
+  }
+}

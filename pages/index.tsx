@@ -1,31 +1,33 @@
-import { useEffect, useState } from "react";
-import { io, Socket } from "socket.io-client";
-
-const Index = () => {
-  const [socket, setSocket] = useState<Socket>(null);
-
-  const handleWS = () => {
-    const socket = io("ws://localhost:8080").connect();
-    setSocket(socket);
-
-    socket.on("connect", () => {
-      console.log(`Connected to WS`);
-    });
-
-    socket.on("event", (data) => {
-      console.log({ data });
-    });
+import { useState } from "react";
+import QRCode from "qrcode";
+import React from "react";
+import clx from "../styles/index.module.scss";
+const index = () => {
+  const [img, setimg] = useState("");
+  const [text, setText] = useState("");
+  const generateQR = async () => {
+    try {
+      setimg(await QRCode.toDataURL(text));
+    } catch (err) {
+      console.error(err);
+    }
   };
-
-  useEffect(() => {
-    handleWS();
-  }, []);
-
   return (
-    <div className="">
-      <button onClick={() => socket.emit("event", "data")}>Emit</button>
-    </div>
+    <form
+      className={clx.form}
+      onSubmit={(e) => {
+        e.preventDefault();
+        generateQR();
+      }}
+    >
+      <input
+        className={clx.input}
+        onChange={(e: any) => setText(e.target.value)}
+      />
+      <button className={clx.btn}>Generate</button>
+      {!!img && <img className="image" src={img} />}
+    </form>
   );
 };
 
-export default Index;
+export default index;
